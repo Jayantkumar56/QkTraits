@@ -85,4 +85,4 @@ namespace Quirk::QkT {
         ASSERT_EQ(strView, "hello");
     }
 
-}
+} // namespace Quirk::QkT

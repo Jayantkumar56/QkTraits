@@ -11,6 +11,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(
     "QkTraits" INTERFACE
     "include/QkTraits/StringLiteral.h"
+    "include/QkTraits/View.h"
 )
 
 
@@ -34,4 +35,5 @@ if(PROJECT_IS_TOP_LEVEL)
     FetchContent_MakeAvailable(googletest)
 
     add_subdirectory(tests)
+    set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT "RunTests")
 endif()
