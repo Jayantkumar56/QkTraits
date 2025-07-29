@@ -8,10 +8,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 
-add_library(
-    "QkTraits" INTERFACE
+add_library("QkTraits" INTERFACE
     "include/QkTraits/StringLiteral.h"
     "include/QkTraits/View.h"
+    "include/QkTraits/TypeList.h"
+    "include/QkTraits/TypeTraits.h"
+    "include/QkTraits/PointerTraits.h"
 )
 
 

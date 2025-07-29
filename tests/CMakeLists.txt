@@ -4,6 +4,9 @@ set(CURRENT_PROJ_NAME "RunTests")
 add_executable(${CURRENT_PROJ_NAME}
     "StringLiteralTest.cpp"
     "ViewTest.cpp"
+    "TypeListTest.cpp"
+    "TypeTraitsTest.cpp"
+    "PointerTraitsTest.cpp"
 )
 
 

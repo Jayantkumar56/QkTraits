@@ -6,9 +6,7 @@
 
 namespace Quirk::QkT {
 
-	class StringLiteralTest : public ::testing::Test {};
-
-    TEST_F(StringLiteralTest, ConstructionAndSize) {
+    TEST(StringLiteralTest, ConstructionAndSize) {
         // Test construction and size from standard string literal.
         {
             constexpr StringLiteral hello = "hello";
@@ -30,7 +28,7 @@ namespace Quirk::QkT {
         }
     }
 
-    TEST_F(StringLiteralTest, DataAccess) {
+    TEST(StringLiteralTest, DataAccess) {
         constexpr StringLiteral testStr = "abc";
 
         // Test the Data() method
@@ -54,7 +52,7 @@ namespace Quirk::QkT {
         }
     }
 
-    TEST_F(StringLiteralTest, EqualityComparison) {
+    TEST(StringLiteralTest, EqualityComparison) {
         constexpr StringLiteral str1 = "world";
         constexpr StringLiteral str2 = "world";
         constexpr StringLiteral str3 = "other";
@@ -77,7 +75,7 @@ namespace Quirk::QkT {
         //     fail to compile because they are different types.
     }
 
-    TEST_F(StringLiteralTest, ViewConversion) {
+    TEST(StringLiteralTest, ViewConversion) {
         constexpr static StringLiteral    hello   = "hello";
         constexpr        std::string_view strView = hello.View();
 
