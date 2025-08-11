@@ -10,6 +10,21 @@
 
 namespace Quirk::QkT {
 
+    struct InvalidType {};
+
+    template<typename T>
+    struct IsInvalid {
+        static constexpr bool Value = std::is_same_v<T, InvalidType>;
+    };
+
+    template<typename T>
+    constexpr bool IsInvalid_V = IsInvalid<T>::Value;
+
+    template<typename T>
+    concept ValidType = !IsInvalid_V<T>;
+
+
+
     template<bool B>
     struct BoolConstant { static constexpr bool Value = B; };
 
