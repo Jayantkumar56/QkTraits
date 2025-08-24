@@ -1,5 +1,7 @@
 
 
+// SPDX-License-Identifier: MIT
+
 #pragma once
 
 #include "View.h"
@@ -9,21 +11,6 @@
 
 
 namespace Quirk::QkT {
-
-    struct InvalidType {};
-
-    template<typename T>
-    struct IsInvalid {
-        static constexpr bool Value = std::is_same_v<T, InvalidType>;
-    };
-
-    template<typename T>
-    constexpr bool IsInvalid_V = IsInvalid<T>::Value;
-
-    template<typename T>
-    concept ValidType = !IsInvalid_V<T>;
-
-
 
     template<bool B>
     struct BoolConstant { static constexpr bool Value = B; };
@@ -46,6 +33,36 @@ namespace Quirk::QkT {
 
     template<typename T>
     inline constexpr bool AlwaysFalse_V = AlwaysFalse<T>::Value;
+
+
+
+    namespace Internal {
+        template <typename T>
+        struct InvalidTypeImpl {
+            InvalidTypeImpl() = delete;
+
+            InvalidTypeImpl(InvalidTypeImpl&&)      = delete;
+            InvalidTypeImpl(const InvalidTypeImpl&) = delete;
+
+            InvalidTypeImpl& operator=(InvalidTypeImpl&&)      = delete;
+            InvalidTypeImpl& operator=(const InvalidTypeImpl&) = delete;
+
+            static_assert(AlwaysFalse_V<T>, "Error: An operation resulted in an InvalidType. ");
+        };
+    } // namespace Internal
+
+    using InvalidType = Internal::InvalidTypeImpl<void>;
+
+    template<typename T>
+    struct IsInvalid {
+        static constexpr bool Value = std::is_same_v<T, InvalidType>;
+    };
+
+    template<typename T>
+    constexpr bool IsInvalid_V = IsInvalid<T>::Value;
+
+    template<typename T>
+    concept ValidType = !IsInvalid_V<T>;
 
 
 
