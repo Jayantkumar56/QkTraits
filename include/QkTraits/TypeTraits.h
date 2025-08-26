@@ -36,33 +36,15 @@ namespace Quirk::QkT {
 
 
 
-    namespace Internal {
-        template <typename T>
-        struct InvalidTypeImpl {
-            InvalidTypeImpl() = delete;
-
-            InvalidTypeImpl(InvalidTypeImpl&&)      = delete;
-            InvalidTypeImpl(const InvalidTypeImpl&) = delete;
-
-            InvalidTypeImpl& operator=(InvalidTypeImpl&&)      = delete;
-            InvalidTypeImpl& operator=(const InvalidTypeImpl&) = delete;
-
-            static_assert(AlwaysFalse_V<T>, "Error: An operation resulted in an InvalidType. ");
-        };
-    } // namespace Internal
-
-    using InvalidType = Internal::InvalidTypeImpl<void>;
-
-    template<typename T>
-    struct IsInvalid {
-        static constexpr bool Value = std::is_same_v<T, InvalidType>;
+    struct InvalidType {
+        InvalidType() = delete;                 // prevent accidental instantiation
     };
 
-    template<typename T>
-    constexpr bool IsInvalid_V = IsInvalid<T>::Value;
+    template<class T>
+    inline constexpr bool IsInvalid_V = std::is_same_v<std::remove_cv_t<T>, InvalidType>;
 
-    template<typename T>
-    concept ValidType = !IsInvalid_V<T>;
+    template<class T>
+    concept ValidType = (!IsInvalid_V<T>);
 
 
 
