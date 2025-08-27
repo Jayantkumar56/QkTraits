@@ -94,23 +94,20 @@ namespace Quirk::QkT {
         template<typename T>
         constexpr static bool Contains = (std::is_same_v<T, Types> || ...);
 
-        // if found returns first occurence of a type in the list
-        // if not found returns static_cast<size_t>(-1)
-        template<typename T>
-        constexpr static size_t IndexOf = [] {
-            if constexpr (IsEmpty) {
-                return static_cast<size_t>(-1);
-            }
-            else {
-                constexpr std::array matches = { std::is_same_v<T, Types>... };
+        static constexpr std::size_t NPos = static_cast<std::size_t>(-1);
 
-                for (size_t i = 0; i < sizeof...(Types); ++i) {
-                    if (matches[i]) {
-                        return i;     // found
-                    }
-                }
-                return static_cast<size_t>(-1); // Not found
+        // if found returns first occurence of a type in the list
+        // if not found returns NPos
+        template <typename T>
+        static constexpr std::size_t IndexOf = [] {
+            constexpr std::array<bool, sizeof...(Types)> matches{ std::is_same_v<T, Types>... };
+
+            for (std::size_t i = 0; i < matches.size(); ++i) {
+                if (matches[i]) 
+                    return i;         // found
             }
+
+            return NPos;              // not found
         }();
 
 
