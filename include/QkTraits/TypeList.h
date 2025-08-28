@@ -253,4 +253,23 @@ namespace Quirk::QkT {
     template<typename List, template<typename> typename Predicate>
     using Filter_T = typename Filter<List, Predicate>::Type;
 
+
+    
+    template<typename List>
+    struct Reverse;
+
+    template<>
+    struct Reverse<TypeList<>> {
+        using Type = TypeList<>;
+    };
+
+    template<typename Head, typename... Tail>
+    struct Reverse<TypeList<Head, Tail...>> {
+        // Recursively reverse the tail and then push the head to the back
+        using Type = PushBack_T<typename Reverse<TypeList<Tail...>>::Type, Head>;
+    };
+
+    template<typename List>
+    using Reverse_T = typename Reverse<List>::Type;
+
 } // namespace Quirk::QkT

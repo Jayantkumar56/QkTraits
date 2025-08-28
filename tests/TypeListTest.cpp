@@ -516,4 +516,31 @@ namespace Quirk::QkT {
         ASSERT_TRUE(true);
     }
 
+
+    TEST(TypeListTest, Reverse) {
+        // Reversing a list with multiple elements
+        {
+            using List = TypeList<int, char*, double>;
+            using Reversed = Reverse_T<List>;
+            static_assert(std::is_same_v<Reversed, TypeList<double, char*, int>>);
+        }
+
+        // Reversing a list with a single element
+        {
+            using List = TypeList<float>;
+            using Reversed = Reverse_T<List>;
+            static_assert(std::is_same_v<Reversed, TypeList<float>>);
+        }
+
+        // Reversing an empty list
+        {
+            using List = TypeList<>;
+            using Reversed = Reverse_T<List>;
+            static_assert(std::is_same_v<Reversed, TypeList<>>);
+        }
+
+        // If static_asserts pass, the test compiles successfully.
+        ASSERT_TRUE(true);
+    }
+
 } // namespace Quirk::QkT
