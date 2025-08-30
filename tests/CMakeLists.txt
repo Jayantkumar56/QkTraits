@@ -7,6 +7,8 @@ add_executable(${CURRENT_PROJ_NAME}
     "TypeListTest.cpp"
     "TypeTraitsTest.cpp"
     "PointerTraitsTest.cpp"
+    "ValueListTest.cpp"
+    "StringListTest.cpp"
 )
 
 

@@ -33,18 +33,7 @@ namespace Quirk::QkT {
         }
 
         // ==== Comparision Function =================================================
-
-        constexpr bool operator==(const StringLiteral& other) const noexcept {
-            // Checking size difference is not necessary 
-            // since StringLiteral with different sizes are different types themselves.
-
-            for (size_t i = 0; i < N; ++i) {
-                if (value[i] != other.value[i])
-                    return false;
-            }
-
-            return true;
-        }
+        constexpr auto operator<=>(const StringLiteral& other) const noexcept = default;
     };
 
 

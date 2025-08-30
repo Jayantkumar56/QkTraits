@@ -14,6 +14,9 @@ add_library("QkTraits" INTERFACE
     "include/QkTraits/TypeList.h"
     "include/QkTraits/TypeTraits.h"
     "include/QkTraits/PointerTraits.h"
+    "include/QkTraits/ValueList.h"
+    "include/QkTraits/StringList.h"
+    "include/QkTraits/ValueTraits.h"
 )
 
 

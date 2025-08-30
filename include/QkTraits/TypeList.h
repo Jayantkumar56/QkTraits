@@ -185,11 +185,8 @@ namespace Quirk::QkT {
 
 
     template<typename List>
-    struct PopBack;
-
-    template<typename... Elements>
-    struct PopBack<TypeList<Elements...>> {
-        using Type = typename Internal::PopBackImpl<TypeList<Elements...>>::Type;
+    struct PopBack {
+        using Type = typename Internal::PopBackImpl<List>::Type;
     };
 
     template<typename List>
