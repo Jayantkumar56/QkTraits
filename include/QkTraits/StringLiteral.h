@@ -14,6 +14,10 @@ namespace Quirk::QkT {
     struct StringLiteral {
         char value[N]{};
 
+        // Default constructor: zero-initialize the buffer
+        constexpr StringLiteral() noexcept : value{} {}
+
+        // Construct from a string literal
         constexpr StringLiteral(const char(&str)[N]) noexcept {
             for (size_t i = 0; i < N; ++i)
                 value[i] = str[i];
@@ -34,6 +38,25 @@ namespace Quirk::QkT {
 
         // ==== Comparision Function =================================================
         constexpr auto operator<=>(const StringLiteral& other) const noexcept = default;
+
+        // ==== Concatenation ======================================================
+        template <size_t N2>
+        constexpr auto operator+(const StringLiteral<N2>& rhs) const {
+            constexpr size_t NewSize = N + N2 - 1; // drop one '\0'
+            StringLiteral<NewSize> result{};       // zero-init
+
+            // Copy lhs (without its null terminator)
+            for (size_t i = 0; i < N - 1; ++i) {
+                result.value[i] = value[i];
+            }
+
+            // Copy rhs (including its null terminator)
+            for (size_t j = 0; j < N2; ++j) {
+                result.value[(N - 1) + j] = rhs.value[j];
+            }
+
+            return result;
+        }
     };
 
 

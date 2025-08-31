@@ -52,27 +52,40 @@ namespace Quirk::QkT {
         }
     }
 
-    TEST(StringLiteralTest, EqualityComparison) {
-        constexpr StringLiteral str1 = "world";
-        constexpr StringLiteral str2 = "world";
-        constexpr StringLiteral str3 = "other";
+    TEST(StringLiteralTest, EqualityAndInequality) {
+        constexpr StringLiteral str1 = "apple";  // N=6
+        constexpr StringLiteral str2 = "apple";  // N=6
+        constexpr StringLiteral str3 = "apric";  // N=6 (same size as "apple")
 
-        // Test for equality
-        {
-            static_assert(str1 == str2, "str1 and str2 should be equal at compile-time.");
-            ASSERT_TRUE(str1 == str2);
-        }
+        // Compile-time checks
+        static_assert(str1 == str2);
+        static_assert(!(str1 != str2));
+        static_assert(str1 != str3);
 
-        // Test for inequality
-        {
-            static_assert(!(str1 == str3), "str1 and str3 should not be equal at compile-time.");
-            ASSERT_FALSE(str1 == str3);
-        }
+        // Runtime checks
+        ASSERT_TRUE(str1 == str2);
+        ASSERT_FALSE(str1 != str2);
+        ASSERT_TRUE(str1 != str3);
+    }
 
-        // Note: 
-        //     An attempt to compare StringLiterals of different sizes,
-        //     like `StringLiteral("a") == StringLiteral("ab")`, will correctly
-        //     fail to compile because they are different types.
+    TEST(StringLiteralTest, RelationalOperators) {
+        constexpr StringLiteral a = "aaa";  // N=4
+        constexpr StringLiteral b = "aab";  // N=4
+        constexpr StringLiteral c = "aac";  // N=4
+
+        // Compile-time
+        static_assert(a < b);
+        static_assert(b < c);
+        static_assert(a <= b);
+        static_assert(c > b);
+        static_assert(c >= b);
+
+        // Runtime
+        ASSERT_TRUE(a < b);
+        ASSERT_TRUE(b < c);
+        ASSERT_TRUE(a <= b);
+        ASSERT_TRUE(c > b);
+        ASSERT_TRUE(c >= b);
     }
 
     TEST(StringLiteralTest, ViewConversion) {
@@ -81,6 +94,49 @@ namespace Quirk::QkT {
 
         // Test for complete view on the original string literal
         ASSERT_EQ(strView, "hello");
+    }
+
+    TEST(StringLiteralTest, ConcatenationBasic) {
+        constexpr StringLiteral hello = "Hello";
+        constexpr StringLiteral world = "World";
+
+        constexpr auto combined = hello + world;
+
+        // Compile-time
+        static_assert(combined.Size() == hello.Size() + world.Size());
+        static_assert(combined.View() == "HelloWorld");
+
+        // Runtime
+        ASSERT_EQ(combined.Size(), 10);
+        ASSERT_EQ(combined.View(), "HelloWorld");
+        ASSERT_EQ(combined.value[combined.Size()], '\0'); // null terminator
+    }
+
+    TEST(StringLiteralTest, ConcatenationWithEmpty) {
+        constexpr StringLiteral empty = "";
+        constexpr StringLiteral text = "Text";
+
+        constexpr auto r1 = empty + text;
+        constexpr auto r2 = text + empty;
+
+        static_assert(r1 == text);
+        static_assert(r2 == text);
+
+        ASSERT_EQ(r1.View(), "Text");
+        ASSERT_EQ(r2.View(), "Text");
+    }
+
+    TEST(StringLiteralTest, MultipleConcatenations) {
+        constexpr StringLiteral a = "A";
+        constexpr StringLiteral b = "B";
+        constexpr StringLiteral c = "C";
+
+        constexpr auto abc = a + b + c;
+
+        static_assert(abc.View() == "ABC");
+
+        ASSERT_EQ(abc.View(), "ABC");
+        ASSERT_EQ(abc.Size(), 3);
     }
 
 } // namespace Quirk::QkT
