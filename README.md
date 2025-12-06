@@ -13,17 +13,15 @@ It extends the standard `<type_traits>` library with additional utilities for **
 
 ## Namespace
 
-All public APIs are contained within the **`Quirk::QkT`** namespace.
+All public APIs are contained within the **`QkT`** namespace.
 
 ```cpp
 // TypeList
-using myTypes = Quirk::QkT::TypeList<int, double, char>;
+using myTypes = QkT::TypeList<int, double, char>;
 
 // StringLiteral
-Quirk::QkT::StringLiteral strLiteral{"Hello"};
+QkT::StringLiteral strLiteral{"Hello"};
 ```
-
-This emphasizes that QkTraits is part of the broader Quirk ecosystem, while remaining usable as a standalone library.
 
 ---
 
@@ -73,7 +71,7 @@ If you don’t use CMake, simply add the include/ directory to your compiler’s
 #include <iostream>
 #include <typeinfo>
 
-using MyTypes = Quirk::QkT::TypeList<int, double, char>;
+using MyTypes = QkT::TypeList<int, double, char>;
 
 int main() {
     MyTypes::ForEach([]<typename T>() {
@@ -88,7 +86,7 @@ int main() {
 #include <QkTraits/TypeList.h>
 #include <iostream>
 
-using MyTypes = Quirk::QkT::TypeList<int, double, char>;
+using MyTypes = QkT::TypeList<int, double, char>;
 
 int main() {
     int count = MyTypes::InvokeWithTypesExpanded(
@@ -108,7 +106,7 @@ int main() {
 #include <iostream>
 
 int main() {
-    auto print = []<Quirk::QkT::StringLiteral str>() {
+    auto print = []<QkT::StringLiteral str>() {
         std::cout << str.View() << '\n'; // "Hello" known at compile time
     };
 
@@ -124,7 +122,7 @@ int main() {
 #include <QkTraits/ValueList.h>
 #include <iostream>
 
-using Numbers = Quirk::QkT::ValueList<1, 2, 3, 5, 8>;
+using Numbers = QkT::ValueList<1, 2, 3, 5, 8>;
 
 int main() {
     // Iterate over values
@@ -139,7 +137,7 @@ int main() {
     static_assert(Numbers::Contains<5>);
 
     // Transform into a tuple
-    auto tuple = Quirk::QkT::ToTuple<Numbers>;
+    auto tuple = QkT::ToTuple<Numbers>;
     static_assert(std::get<4>(tuple) == 8);
 }
 ```
@@ -152,7 +150,7 @@ int main() {
 #include <iostream>
 
 // StringList of compile-time strings
-using Words = Quirk::QkT::StringList<"Hello", "from", "QkTraits">;
+using Words = QkT::StringList<"Hello", "from", "QkTraits">;
 
 int main() {
     // Iterate over strings
@@ -169,7 +167,7 @@ int main() {
     static_assert(Words::IndexOf<"Hello"> == 0);
 
     // Reverse list
-    using Reversed = Quirk::QkT::ReverseStr_T<Words>;
+    using Reversed = QkT::ReverseStr_T<Words>;
 }
 ```
 
@@ -186,16 +184,16 @@ struct Derived : Base { void hello() override { std::cout << "Derived\n"; } };
 int main() {
     // Constructing from raw pointer
     Derived d;
-    Quirk::QkT::View<Derived> view{&d};
+    QkT::View<Derived> view{&d};
     view->hello();                 // prints: Derived
 
     // Constructing from smart pointer (non-owning)
     auto ptr = std::make_unique<Derived>();
-    Quirk::QkT::View<Base> base_view{ptr};
+    QkT::View<Base> base_view{ptr};
     base_view->hello();            // prints: Derived
 
     // Downcasting
-    auto derived_view = Quirk::QkT::ViewDowncast<Derived>(base_view);
+    auto derived_view = QkT::ViewDowncast<Derived>(base_view);
     derived_view->hello();         // prints: Derived
 }
 ```
