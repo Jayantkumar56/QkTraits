@@ -10,7 +10,7 @@
 #include <filesystem>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     template<bool B>
     struct BoolConstant { static constexpr bool Value = B; };
@@ -83,4 +83,15 @@ namespace Quirk::QkT {
     template<template<typename> typename Condition, typename T>
     concept ConditionTrait = requires { { Condition<T>::Value } -> std::convertible_to<bool>; };
 
-} // namespace Quirk::QkT
+
+
+    template<typename Key, typename ...Types>
+    struct IsOneOf : std::bool_constant<(std::is_same_v<Key, Types> || ...)> {};
+
+    template<typename Key, typename ...Types>
+    inline constexpr bool IsOneOf_V = IsOneOf<Key, Types...>::value;
+
+    template<typename T>
+    concept IsOneOfType = IsOneOf_V<T>;
+
+} // namespace QkT

@@ -8,7 +8,7 @@
 #include <vector>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     // =============================================================================
     // Helper Functors
@@ -213,4 +213,4 @@ namespace Quirk::QkT {
         static_assert(std::is_same_v<R, StringList<"C", "B", "A">>);
     }
 
-} // namespace Quirk::QkT
+} // namespace QkT

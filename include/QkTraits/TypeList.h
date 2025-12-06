@@ -11,7 +11,7 @@
 #include <array>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     namespace Internal {
         template<typename... Types>
@@ -269,4 +269,4 @@ namespace Quirk::QkT {
     template<typename List>
     using Reverse_T = typename Reverse<List>::Type;
 
-} // namespace Quirk::QkT
+} // namespace QkT

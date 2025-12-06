@@ -7,7 +7,7 @@
 #include "TypeTraits.h"
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     static constexpr size_t NPos = static_cast<size_t>(-1);
 
@@ -30,7 +30,10 @@ namespace Quirk::QkT {
     template<auto Value1, auto Value2>
     struct EqualVal {
         static constexpr bool Value = [] {
-            if constexpr (std::is_same_v<decltype(Value1), decltype(Value2)>) {
+            using Type1 = std::remove_cvref_t<decltype(Value1)>;
+            using Type2 = std::remove_cvref_t<decltype(Value2)>;
+
+            if constexpr (std::is_same_v<Type1, Type2>) {
                 return Value1 == Value2;
             }
             else {
@@ -42,4 +45,4 @@ namespace Quirk::QkT {
     template<auto Value1, auto Value2>
     inline constexpr bool EqualVal_V = EqualVal<Value1, Value2>::Value;
 
-}
+} // namespace QkT

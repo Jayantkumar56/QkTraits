@@ -9,7 +9,7 @@ add_executable(${CURRENT_PROJ_NAME}
     "PointerTraitsTest.cpp"
     "ValueListTest.cpp"
     "StringListTest.cpp"
-)
+ "FuntionTraitTest.cpp")
 
 
 target_link_libraries(${CURRENT_PROJ_NAME} PRIVATE

@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     TEST(StringLiteralTest, ConstructionAndSize) {
         // Test construction and size from standard string literal.
@@ -139,4 +139,4 @@ namespace Quirk::QkT {
         ASSERT_EQ(abc.Size(), 3);
     }
 
-} // namespace Quirk::QkT
+} // namespace QkT

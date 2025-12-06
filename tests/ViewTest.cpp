@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     // =============================================================================
     // Test Fixtures and Helper Structs
@@ -204,4 +204,4 @@ namespace Quirk::QkT {
         ASSERT_TRUE(derivedView);
     }
 
-} // namespace Quirk::QkT
+} // namespace QkT

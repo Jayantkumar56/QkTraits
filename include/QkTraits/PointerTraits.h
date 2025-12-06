@@ -9,7 +9,7 @@
 #include <memory>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     namespace internal {
         template<typename T>
@@ -67,4 +67,4 @@ namespace Quirk::QkT {
     template<typename T>
     using PointingType_T = typename PointingType<std::remove_cvref_t<T>>::Type;
 
-} // namespace Quirk::QkT
+} // namespace QkT

@@ -9,7 +9,7 @@
 #include <filesystem>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     // =============================================================================
     // Test Cases
@@ -176,4 +176,4 @@ namespace Quirk::QkT {
         SUCCEED();
     }
 
-} // namespace Quirk::QkT
+} // namespace QkT

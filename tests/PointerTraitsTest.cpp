@@ -6,7 +6,7 @@
 #include <string>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     // =============================================================================
     // Helper Structs
@@ -68,4 +68,4 @@ namespace Quirk::QkT {
         SUCCEED();
     }
 
-} // namespace Quirk::QkT
+} // namespace QkT

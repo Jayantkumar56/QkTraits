@@ -8,7 +8,7 @@
 #include "StringLiteral.h"
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     // Deligates to ValueList internally
 	template<StringLiteral ...Strings>
@@ -209,4 +209,4 @@ namespace Quirk::QkT {
     template<typename List>
     using ReverseStr_T = typename ReverseStr<List>::Type;
 
-}
+} // namespace QkT

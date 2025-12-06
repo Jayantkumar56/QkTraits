@@ -7,7 +7,7 @@
 #include <memory>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     template<typename T>
     class View {
@@ -82,4 +82,4 @@ namespace Quirk::QkT {
         return View<const Derived>(static_cast<const Derived*>(base_view.Get()));
     }
 
-} // namespace Quirk::QkT
+} // namespace QkT

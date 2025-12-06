@@ -8,7 +8,7 @@
 #include <cassert>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     template <size_t N>
     struct StringLiteral {
@@ -66,4 +66,4 @@ namespace Quirk::QkT {
     template<size_t N>
     StringLiteral(const char(&str)[N]) -> StringLiteral<N>;
 
-} // namespace Quirk::QkT
+} // namespace QkT

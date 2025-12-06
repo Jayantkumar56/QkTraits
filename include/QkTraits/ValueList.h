@@ -9,7 +9,7 @@
 #include <array>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     namespace Internal {
         // Helper for HasDuplicates
@@ -268,4 +268,4 @@ namespace Quirk::QkT {
     template<typename List>
     using ReverseVal_T = typename ReverseVal<List>::Type;
 
-} // namespace Quirk::QkT
+} // namespace QkT

@@ -9,7 +9,7 @@
 #include <tuple>
 
 
-namespace Quirk::QkT {
+namespace QkT {
 
     // =============================================================================
     // Test Fixtures and Helper Structs
@@ -543,4 +543,4 @@ namespace Quirk::QkT {
         ASSERT_TRUE(true);
     }
 
-} // namespace Quirk::QkT
+} // namespace QkT
